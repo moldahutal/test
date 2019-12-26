@@ -3,7 +3,7 @@
     <apiVersion>45.0</apiVersion>
     <packageVersions>
         <majorNumber>191</majorNumber>
-        <minorNumber>2</minorNumber>
+        <minorNumber>0</minorNumber>
         <namespace>NE</namespace>
     </packageVersions>
     <status>Active</status>
