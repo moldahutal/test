@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build') {
             steps { 
-                bat 'sfdx force:source:deploy -p .'
+                bat 'sfdx force:source:deploy -p "C:\Program Files (x86)\Jenkins\workspace\JenDemoWithSFDX_GitMoldaTest"'
             }
         }
     }
