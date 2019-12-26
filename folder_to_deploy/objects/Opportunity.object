@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <validationRules>
+        <fullName>BI_Fecha_de_vigencia_obligatoria</fullName>
+        <active>true</active>
+        <description>La fecha de vigencia de la oferta debe ser requerida en F3, F2 y F1</description>
+        <errorConditionFormula>IF(
+    (TEXT($User.Pais__c) &lt;&gt; &apos;Colombia&apos;), 
+  AND(
+  NOT( RecordType.DeveloperName= &quot;BI_Oportunidad_Regional&quot;),
+        NOT((VE_Express__c = true) &amp;&amp; OR(
+           ISPICKVAL(BI_Country__c,&apos;Puerto Rico&apos;),
+           ISPICKVAL(BI_Country__c,&apos;United States&apos;)
+       )), /*Demanda 489*/
+    NOT(BI_Ultrarapida__c = true),
+    !$Setup.BI_bypass__c.BI_migration__c,
+    OR(
+    ISBLANK( BI_Fecha_de_vigencia__c),
+    ISNULL(BI_Fecha_de_vigencia__c)
+    ),
+    ISPICKVAL(StageName, &apos;F2 - Negotiation&apos;)
+    ),False)</errorConditionFormula>
+        <errorMessage>Debe rellenar la fecha de vigencia de la oferta</errorMessage>
+    </validationRules>
+</CustomObject>
