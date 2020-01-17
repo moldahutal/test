@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>KNL_DescribeDataCategoryGroupStructures</members>
-        <members>KNL_autoCategorizationHandler</members>
-        <members>KNL_autoCategorizationHandlerTest</members>
+        <members>TBS_OT_OrderFlowMethods</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>KnowledgeTrigger</members>
-        <name>ApexTrigger</name>
+        <members>BI_Sede__c-CPQ_LEX_Direccion</members>
+        <members>TBS_OT_SOF__c-TBS_OT_InternetResale</members>
+        <members>TBS_OT_SOF__c-TBS_OT_LANwLANSite</members>
+        <members>TBS_OT_SOF__c-TBS_OT_MPLSVPNSite</members>
+        <name>Layout</name>
     </types>
     <version>47.0</version>
 </Package>
