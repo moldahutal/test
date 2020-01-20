@@ -12,6 +12,7 @@
 @isTest
 public class BI_LEX_CreateMultipleSubOpp_TEST {
 
+    // comentario
     public static User testUser;
     public static Account accHolding;
     public static Account accCC;
