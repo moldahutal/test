@@ -15,15 +15,15 @@
                 $commitedFiles += ""#>
 
                 #cls
+                $targetDir = 'ToDeploy'
                 $commitedFiles = @(git log -1 --name-only)
                 if (!($commitedFiles -match "package.xml")) { "Error, el ultimo commit no contiene un package.xml"; exit 1 }
-                if (Test-Path ToDeploy) { Remove-item ToDeploy -Recurse -Force -ErrorAction SilentlyContinue }
-                if (!(Test-Path ToDeploy)) { New-Item ToDeploy -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
-                for ($i=6; $i -lt $commitedFiles.Length -1; $i++) {
+                if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction SilentlyContinue }
+                if (!(Test-Path $targetDir)) { New-Item $targetDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
+                for ($i=6; $i -lt $commitedFiles.Length; $i++) {
                     $file = $commitedFiles[$i]
                     "file -> $file"
-                    $targetDir = "ToDeploy"
-                    $dest = "ToDeploy/" + $file.Substring(0, $file.LastIndexOf("/"))
+                    $dest = "$targetDir" + $file.Substring(0, $file.LastIndexOf('/')).Replace('folder_to_deploy','').Replace('//','/')
                     "dest -> $dest"
                     if (!(Test-Path $dest)) { New-Item $dest -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
                     Copy-Item $file $dest -Force -ErrorAction SilentlyContinue
