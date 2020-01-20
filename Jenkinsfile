@@ -14,7 +14,7 @@ pipeline {
         }
         stage('3. Deploying...') {
             steps { 
-                bat 'sfdx force:mdapi:deploy -w 60 -d "C:/Program Files (x86)/Jenkins/workspace/JenDemoWithSFDX_GitMoldaTest/folder_to_deploy/ToDeploy" -u release.manager@telefonicab2b.com.autuat'
+                bat 'sfdx force:mdapi:deploy -w 60 -d "C:/Program Files (x86)/Jenkins/workspace/JenDemoWithSFDX_GitMoldaTest/ToDeploy" -u release.manager@telefonicab2b.com.autuat'
             }
         }
     }
