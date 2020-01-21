@@ -5,7 +5,7 @@ if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction 
 if (!(Test-Path $targetDir)) { New-Item $targetDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
 for ($i=6; $i -lt $commitedFiles.Length; $i++) {
     $file = $commitedFiles[$i]
-    if ($file -match '%Jenkinsfile%') { continue }
+    if ($file -match 'Jenkinsfile') { continue }
     $dest = "$targetDir" + $file.Substring(0, $file.LastIndexOf('/')).Replace('folder_to_deploy','').Replace('//','/')
     "Copiando de -> $file a -> $dest"
     if (!(Test-Path $dest)) { New-Item $dest -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }

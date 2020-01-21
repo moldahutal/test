@@ -21,7 +21,7 @@ pipeline {
         }
         stage('2. Copying Commited Files...') {
             steps { 
-                bat 'powershell -NonInteractive -ExecutionPolicy Bypass -file Jenkinsfile.ps1'
+                bat 'powershell -NonInteractive -ExecutionPolicy Bypass -file JenkinsFiles/Jenkinsfile.ps1'
             }
         }
         stage('3. Deploying...') {
