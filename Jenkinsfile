@@ -1,7 +1,8 @@
 pipeline {
     agent any
     triggers {
-        cron('H/5 H(9-18) * * 1-5')
+        // Trigger para ejecutar el pipeline cada 5 minutos entre las 9 y las 18 de lunes a viernes
+        cron('H/5 9-18 * * 1-5')
     }
     stages {
         stage('1. Connecting to AUTUAT'){
