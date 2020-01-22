@@ -9,7 +9,7 @@
 -------------------------------------------------------------------------------------*/
 @isTest
 private class TGS_CaseMethods_TEST {  
- 
+   
     static{
         BI_TestUtils.throw_exception = false;
     }
