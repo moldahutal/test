@@ -5,9 +5,12 @@ if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction 
 if (!(Test-Path $targetDir)) { New-Item $targetDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
 for ($i=6; $i -lt $commitedFiles.Length; $i++) {
     $file = $commitedFiles[$i]
-    if ($file -match 'Jenkinsfile') { continue }
+    # Evito los archivos JenkinsFile y los archivos meta
+    if (($file -match 'Jenkinsfile') -or ($file -match '-meta.xml')) { continue }
+    # Para evitar problemas con los archivos que necesitan otros archivos quito la extension y copio todo lo que se llame igual
+    $file = $file.Replace((Get-ChildItem $file).Extension,'')
     $dest = "$targetDir" + $file.Substring(0, $file.LastIndexOf('/')).Replace('folder_to_deploy','').Replace('//','/')
-    "Copiando de -> $file a -> $dest"
+    "Copiando de -> $file* a -> $dest"
     if (!(Test-Path $dest)) { New-Item $dest -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
-    Copy-Item $file $dest -Force -ErrorAction SilentlyContinue
+    Copy-Item $file* $dest -Force -ErrorAction SilentlyContinue
 }
