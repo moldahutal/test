@@ -1,0 +1,50 @@
+<project name="Salesforce Deployment" default="deploy__TEST" basedir="." xmlns:sf="antlib:com.salesforce">
+	<!-- Deploy vars secured here -->
+	<property environment="ENV"/>
+	<property file="../build.properties"/>
+ 	<!-- JSMin Task Def
+	<taskdef name="jsmin" classname="net.matthaynes.jsmin.JSMin_Task" classpath="${ant.home}/lib/jsmin.0.2.4.jar"/> -->
+    <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
+        <classpath>
+            <pathelement location="../ant-salesforce.jar" />
+        </classpath>
+    </taskdef>
+
+	<target name="vAUTUAT" depends="proxy">
+		<sf:deploy
+		username="${sf.autuat.username}"
+		password="${sf.autuat.password}"
+		serverurl="${sf.sandbox.serverurl}"
+		deployRoot="ToDeploy"
+		maxPoll="1000"
+		runAllTests="false"
+		checkOnly="true"
+		ignoreWarnings="true"
+		pollWaitMillis="10000"/>
+	</target>
+
+	<target name="dAUTUAT" depends="proxy">
+		<sf:deploy
+		username="${sf.autuat.username}"
+		password="${sf.autuat.password}"
+		serverurl="${sf.sandbox.serverurl}"
+		deployRoot="ToDeploy"
+		maxPoll="1000"
+		runAllTests="false"
+		checkOnly="false"
+		ignoreWarnings="true"
+		pollWaitMillis="10000"/>
+	</target>
+
+	<target name="minify__assetsJS">
+		<jsmin destdir="assets/js" force="true">
+			<fileset dir="assets/js/" includes="**/*.js"/>
+		</jsmin>
+	</target>
+
+	<target name="proxy">
+		<property name="proxy.host" value="proxyinternet.t0.inet"/>
+		<property name="proxy.port" value="8080"/>
+		<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}"/>
+	</target>
+</project>
