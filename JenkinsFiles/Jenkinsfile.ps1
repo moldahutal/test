@@ -2,11 +2,16 @@
 $targetDir = 'ToDeploy'
 $commitedFiles = @(git log -1 --name-only) | ? { $_ -match $srcDirectory }
 
+# Archivos nuevos:
+Write-Host 'Archivos detectados en el ultimo commit:'
+Write-Host "$commitedFiles`n"
+
 if (!($commitedFiles -match "package.xml")) { "Error, el ultimo commit no contiene un package.xml"; exit 1 }
 if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction SilentlyContinue }
 if (!(Test-Path $targetDir)) { New-Item $targetDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
-for ($i=6; $i -lt $commitedFiles.Length; $i++) {
-    $file = $commitedFiles[$i]
+#for ($i=6; $i -lt $commitedFiles.Length; $i++) {
+    #$file = $commitedFiles[$i]
+foreach ($file in $commitedFiles) {
     # Evito los archivos JenkinsFile y los archivos meta
     if (($file -match 'Jenkinsfile') -or ($file -match '-meta.xml')) { continue }
     # Para evitar problemas con los archivos que necesitan otros archivos quito la extension y copio todo lo que se llame igual
