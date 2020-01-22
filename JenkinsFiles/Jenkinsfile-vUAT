@@ -9,11 +9,10 @@ pipeline {
         // Set a timeout period for the Pipeline run, after which Jenkins should abort the Pipeline
         timeout(time: 1, unit: 'HOURS')
     }
-    triggers {
+    //triggers {
         // Trigger para ejecutar el pipeline cada 5 minutos entre las 9 y las 18 de lunes a viernes
         //cron('H/5 9-18 * * 1-5')
-        triggerOnPush: true
-    }
+    //}
     stages {
         //stage('1. Connecting to AUTUAT'){
         //    steps {
@@ -35,6 +34,9 @@ pipeline {
                 // deploy command
                 //bat 'sfdx force:mdapi:deploy -w 60 -d "ToDeploy" -u release.manager@telefonicab2b.com.autuat'
                 bat 'ant dAUTUAT'
+            }
+            steps {
+                bat 'rm block_repository'
             }
         }
     }
