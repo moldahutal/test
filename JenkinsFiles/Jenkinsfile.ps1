@@ -1,8 +1,7 @@
 ﻿$targetDir = 'ToDeploy'
 $commitedFiles = @(git log -1 --name-only)
 
-# comento esta linea durante el desarrollo para evitar tener que subir un package.xml en cada push
-#if (!($commitedFiles -match "package.xml")) { "Error, el ultimo commit no contiene un package.xml"; exit 1 }
+if (!($commitedFiles -match "package.xml")) { "Error, el ultimo commit no contiene un package.xml"; exit 1 }
 if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction SilentlyContinue }
 if (!(Test-Path $targetDir)) { New-Item $targetDir -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
 for ($i=6; $i -lt $commitedFiles.Length; $i++) {
