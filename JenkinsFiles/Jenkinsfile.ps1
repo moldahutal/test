@@ -13,5 +13,5 @@ for ($i=6; $i -lt $commitedFiles.Length; $i++) {
     $dest = "$targetDir" + $file.Substring(0, $file.LastIndexOf('/')).Replace('folder_to_deploy','').Replace('//','/')
     "Copiando de -> $file* a -> $dest"
     if (!(Test-Path $dest)) { New-Item $dest -ItemType Directory -Force -ErrorAction SilentlyContinue | Out-Null }
-    Copy-Item $file* $dest -Force -ErrorAction SilentlyContinue
+    Copy-Item $file*.* $dest -Force -ErrorAction SilentlyContinue
 }
