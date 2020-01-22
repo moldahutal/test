@@ -35,6 +35,8 @@ pipeline {
                 //bat 'sfdx force:mdapi:deploy -w 60 -d "ToDeploy" -u release.manager@telefonicab2b.com.autuat'
                 bat 'ant dAUTUAT'
             }
+        }
+        stage('4. Liberando repositorio...') {
             steps {
                 bat 'rm block_repository'
             }

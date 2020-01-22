@@ -1,10 +1,19 @@
-﻿$srcDirectory = 'folder_to_deploy'
+﻿# Este fichero se usará para bloquear la ejecucion de varias instancias del pipeline a la vez
+$blockFile = 'block_repository'
+if (Test-Path $blockFile) {
+    'Error, ya se está ejecutando una instancia del pipeline!!!'
+    Exit 1
+} else {
+    $blockFile | Out-File $blockFile -Force -ErrorAction SilentlyContinue
+}
+
+$srcDirectory = 'folder_to_deploy'
 $targetDir = 'ToDeploy'
 $commitedFiles = @(git log -1 --name-only) | ? { $_ -match $srcDirectory }
 
 # Archivos nuevos:
-Write-Host 'Archivos detectados en el ultimo commit:'
-Write-Host "$commitedFiles`n"
+'Archivos detectados en el ultimo commit:'
+$commitedFiles
 
 if (!($commitedFiles -match "package.xml")) { "Error, el ultimo commit no contiene un package.xml"; exit 1 }
 if (Test-Path $targetDir) { Remove-item $targetDir -Recurse -Force -ErrorAction SilentlyContinue }
