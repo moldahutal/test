@@ -1,7 +1,7 @@
 <project name="Salesforce Deployment" default="deploy__TEST" basedir="." xmlns:sf="antlib:com.salesforce">
 	<!-- Deploy vars secured here -->
 	<property environment="ENV"/>
-	<property file="../build.properties"/>
+	<property file="build.properties"/>
  	<!-- JSMin Task Def
 	<taskdef name="jsmin" classname="net.matthaynes.jsmin.JSMin_Task" classpath="${ant.home}/lib/jsmin.0.2.4.jar"/> -->
     <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
