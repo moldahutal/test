@@ -16,16 +16,19 @@ pipeline {
     stages {
         stage('1. Connecting to AUTUAT'){
             steps {
+                bat 'echo ####################################################################################'
                 bat 'sfdx force:auth:jwt:grant --clientid 3MVG9w8uXui2aB_rEa7IWhGCNoVWweg65EYZ2ycWxt8KBMrTBZ67SKR6m4KMO_MGpiPlJHCy8dUnsKYxoBdQP --jwtkeyfile server.key --username release.manager@telefonicab2b.com.autuat'
             }
         }
         stage('2. Copying Commited Files...') {
             steps { 
+                bat 'echo ####################################################################################'
                 bat 'powershell -NonInteractive -ExecutionPolicy Bypass -file JenkinsFiles/Jenkinsfile.ps1'
             }
         }
         stage('3. Deploying...') {
             steps {
+                bat 'echo ####################################################################################'
                 // validate command
                 // bat 'sfdx force:mdapi:deploy -c -w 60 -d "C:/Program Files (x86)/Jenkins/workspace/JenDemoWithSFDX_GitMoldaTest/folder_to_deploy/ToDeploy" -u release.manager@telefonicab2b.com.autuat'
                 // deploy command
